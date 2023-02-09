@@ -1,2 +1,6 @@
-<h1>Employers</h1>
-<p>Welcome to Employers</p>
+<h1>Employer List</h1>
+<ul>
+    {{#each employers}}
+        <li>{{this.name}}</li>
+    {{/each}}
+</ul>
