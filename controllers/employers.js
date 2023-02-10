@@ -22,5 +22,9 @@ router.get('/', (req, res) => {
     });  
 })
 
+/* GET/ create - display form to add an employer*/
+router.get('/', (req, res) => {
+    res.render('employers/create', {title: 'Create Employer'})
+});
 // make public
 module.exports = router;
