@@ -23,3 +23,12 @@ main {
 h1 {
   color: #063672;
 }
+.navbar-brand{
+color: white;
+font-weight: bolder;
+font-size: 2rem;
+}
+.nav-link{
+  color: white;
+  font-weight: bold;
+}

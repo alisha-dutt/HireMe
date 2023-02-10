@@ -21,6 +21,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//use dotenv to read .env file with config vars
+//this is only required for dev mode / render already has a section for enviromment vars 
+if(process.env.NODE_ENV != 'production'){
+  require('dotenv').config()
+}
+//mongoDb connection using mongoose
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.CONNECTION_STRING)
+.then((res)=>{
+  console.log('Connected to MongoDb');
+})
+.catch(()=>{
+  console.log('Connection to MongoDb Failed');
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 //custom controller req
