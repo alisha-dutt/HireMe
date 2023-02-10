@@ -28,7 +28,7 @@ if(process.env.NODE_ENV != 'production'){
 }
 //mongoDb connection using mongoose
 const mongoose = require('mongoose');
-
+  
 mongoose.connect(process.env.CONNECTION_STRING)
 .then((res)=>{
   console.log('Connected to MongoDb');
