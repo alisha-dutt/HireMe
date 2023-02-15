@@ -5,7 +5,8 @@ const router = express.Router();
 const fs = require('fs');
 
 // use Employer model for CRUD w/mongoose
-const Employer = require('../models/employer');
+const Employer = require('../models/employers');
+
 
 /* GET employers index (the module home page) */
 router.get('/', (req, res) => {
