@@ -6,8 +6,9 @@ const logger = require('morgan');
 
 const indexRouter = require('./controllers/index');
 const usersRouter = require('./controllers/users');
-//new cutsom controller
-const employersRouter = require('./controllers/employers');
+// reference our new custom controllers
+const employers = require('./controllers/employers');
+const cities = require('./controllers/cities');
 
 const app = express();
 
@@ -21,26 +22,37 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//use dotenv to read .env file with config vars
-//this is only required for dev mode / render already has a section for enviromment vars 
-if(process.env.NODE_ENV != 'production'){
+// use dotenv to read .env file with config vars
+if (process.env.NODE_ENV != 'production') {
   require('dotenv').config()
 }
-//mongoDb connection using mongoose
+
+// mongodb connection using mongoose
 const mongoose = require('mongoose');
-  
+
 mongoose.connect(process.env.CONNECTION_STRING)
-.then((res)=>{
-  console.log('Connected to MongoDb');
+.then((res) => {
+  console.log('Connected to MongoDB');
 })
-.catch(()=>{
-  console.log('Connection to MongoDb Failed');
+.catch(() => {
+  console.log('Connection to MongoDB Failed');
 });
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-//custom controller req
-app.use('/employers', employersRouter);
+// map all requests at /employers to our own employers.js controller
+app.use('/employers', employers);
+app.use('/cities', cities);
+
+// add hbs extension function to select the correct dropdown option when editing
+const hbs = require('hbs');
+hbs.registerHelper('selectOption', (currentValue, selectedValue) => {
+  let selectedProperty = '';
+  if (currentValue == selectedValue) {
+    selectedProperty = ' selected';
+  }
+  return new hbs.SafeString(`<option${selectedProperty}>${currentValue}</option>`);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

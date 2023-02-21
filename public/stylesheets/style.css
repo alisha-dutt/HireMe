@@ -9,7 +9,7 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #DB0007;
 }
 
 main {
@@ -18,17 +18,32 @@ main {
 
 .navbar-dark {
   background-color: #DB0007;
+  padding-left: 20px;
 }
 
-h1 {
+h1, i {
   color: #063672;
+  padding: 4px;
 }
-.navbar-brand{
-color: white;
-font-weight: bolder;
-font-size: 2rem;
+
+i:hover {
+  color: #DB0007;
 }
-.nav-link{
-  color: white;
-  font-weight: bold;
+
+.nav-link {
+  color: #FFFFFF;
+}
+
+fieldset {
+  border: none;
+  margin: 5px;
+}
+
+label {
+  width: 130px;
+}
+
+thead {
+  color: #FFFFFF;
+  background-color: #063672;
 }
